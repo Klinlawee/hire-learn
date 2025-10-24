@@ -5,12 +5,12 @@ const companySchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide company name'],
     trim: true,
-    maxlength: 100
+    maxlength: [100, 'Company name cannot be more than 100 characters']
   },
   description: {
     type: String,
     required: [true, 'Please provide company description'],
-    maxlength: 1000
+    maxlength: [2000, 'Description cannot be more than 2000 characters']
   },
   logo: {
     type: String,
@@ -33,17 +33,27 @@ const companySchema = new mongoose.Schema({
   },
   size: {
     type: String,
-    enum: ['1-10', '11-50', '51-200', '201-500', '501-1000', '1000+']
+    enum: ['1-10', '11-50', '51-200', '201-500', '501-1000', '1000+'],
+    required: true
   },
   location: {
     address: String,
     city: String,
     state: String,
-    country: String,
+    country: {
+      type: String,
+      default: 'United States'
+    },
     zipCode: String
   },
   contact: {
-    email: String,
+    email: {
+      type: String,
+      match: [
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+        'Please provide a valid email'
+      ]
+    },
     phone: String
   },
   socialMedia: {
@@ -59,9 +69,47 @@ const companySchema = new mongoose.Schema({
   isVerified: {
     type: Boolean,
     default: false
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  metadata: {
+    totalJobs: {
+      type: Number,
+      default: 0
+    },
+    totalHires: {
+      type: Number,
+      default: 0
+    },
+    averageRating: {
+      type: Number,
+      default: 0
+    }
   }
 }, {
   timestamps: true
+})
+
+// Index for search functionality
+companySchema.index({ 
+  name: 'text', 
+  description: 'text', 
+  industry: 'text' 
+})
+
+// Update total jobs count when jobs are added/removed
+companySchema.methods.updateJobCount = async function() {
+  const Job = mongoose.model('Job')
+  const jobCount = await Job.countDocuments({ companyId: this._id, status: 'active' })
+  this.metadata.totalJobs = jobCount
+  return this.save()
+}
+
+// Virtual for company rating
+companySchema.virtual('rating').get(function() {
+  return this.metadata.averageRating
 })
 
 export default mongoose.model('Company', companySchema)
