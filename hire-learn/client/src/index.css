@@ -1,18 +1,34 @@
+/* index.css - Main CSS entry point for Hire & Learn */
+
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* TailwindCSS Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom base styles */
+/* Custom Base Styles */
 @layer base {
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
     @apply bg-gray-50 text-gray-900 antialiased;
     font-feature-settings: 'rlig' 1, 'calt' 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Improved focus styles */
+  :focus {
+    @apply outline-none ring-2 ring-primary-500 ring-opacity-50;
+  }
+
+  :focus:not(:focus-visible) {
+    @apply ring-0;
   }
 
   /* Custom scrollbar */
@@ -37,46 +53,88 @@
     @apply bg-primary-200 text-primary-900;
   }
 
-  /* Focus styles */
-  :focus {
-    @apply outline-none ring-2 ring-primary-500 ring-opacity-50;
-  }
-
-  :focus:not(:focus-visible) {
-    @apply ring-0;
-  }
-
   /* Typography improvements */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-semibold tracking-tight text-gray-900;
   }
 
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl;
+    line-height: 1.1;
   }
 
   h2 {
     @apply text-3xl md:text-4xl;
+    line-height: 1.2;
   }
 
   h3 {
     @apply text-2xl md:text-3xl;
+    line-height: 1.3;
   }
 
   h4 {
     @apply text-xl md:text-2xl;
+    line-height: 1.4;
   }
 
   h5 {
     @apply text-lg md:text-xl;
+    line-height: 1.5;
   }
 
   h6 {
     @apply text-base md:text-lg;
+    line-height: 1.6;
+  }
+
+  p {
+    @apply text-gray-700 leading-relaxed;
+  }
+
+  /* Link styles */
+  a {
+    @apply text-primary-600 hover:text-primary-700 transition-colors duration-200;
+  }
+
+  /* Form element base styles */
+  input, textarea, select {
+    @apply text-gray-900 placeholder-gray-400;
+  }
+
+  /* Code and pre styles */
+  code {
+    @apply font-mono text-sm;
+  }
+
+  pre {
+    @apply font-mono text-sm bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto;
+  }
+
+  /* Blockquote styles */
+  blockquote {
+    @apply border-l-4 border-gray-300 pl-4 text-gray-600 italic;
+  }
+
+  /* Table base styles */
+  table {
+    @apply w-full;
+  }
+
+  th, td {
+    @apply px-4 py-3 text-left align-top;
+  }
+
+  th {
+    @apply font-semibold text-gray-700 bg-gray-50;
+  }
+
+  td {
+    @apply text-gray-600 border-t border-gray-200;
   }
 }
 
-/* Custom component styles */
+/* Custom Component Styles */
 @layer components {
   /* Button variants */
   .btn {
@@ -88,7 +146,7 @@
   }
 
   .btn-secondary {
-    @apply btn bg-secondary-100 text-secondary-700 hover:bg-secondary-200 focus:ring-secondary-500;
+    @apply btn bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-gray-500;
   }
 
   .btn-success {
@@ -113,7 +171,7 @@
 
   /* Input styles */
   .input {
-    @apply block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed;
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed transition-colors duration-200;
   }
 
   .input-error {
@@ -155,7 +213,7 @@
   }
 
   .badge-secondary {
-    @apply badge bg-secondary-100 text-secondary-800;
+    @apply badge bg-gray-100 text-gray-800;
   }
 
   /* Alert styles */
@@ -181,7 +239,7 @@
 
   /* Loading spinner */
   .spinner {
-    @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin;
+    @apply inline-block border-2 border-current border-t-transparent rounded-full animate-spin;
   }
 
   /* Skeleton loading */
@@ -244,9 +302,407 @@
   .form-help {
     @apply text-sm text-gray-500 mt-1;
   }
+
+  /* Avatar sizes */
+  .avatar-sm {
+    @apply w-8 h-8 text-sm;
+  }
+
+  .avatar-md {
+    @apply w-12 h-12 text-base;
+  }
+
+  .avatar-lg {
+    @apply w-16 h-16 text-lg;
+  }
+
+  .avatar-xl {
+    @apply w-20 h-20 text-xl;
+  }
+
+  /* Progress bar */
+  .progress {
+    @apply w-full bg-gray-200 rounded-full h-2;
+  }
+
+  .progress-bar {
+    @apply h-2 bg-primary-600 rounded-full transition-all duration-300;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    @apply relative;
+  }
+
+  .tooltip-content {
+    @apply absolute z-50 px-2 py-1 text-xs text-white bg-gray-900 rounded shadow-lg opacity-0 pointer-events-none transition-opacity duration-200;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .tooltip:hover .tooltip-content {
+    @apply opacity-100;
+  }
+
+  /* Dropdown */
+  .dropdown {
+    @apply relative;
+  }
+
+  .dropdown-menu {
+    @apply absolute right-0 z-50 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-1 opacity-0 invisible transition-all duration-200;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    @apply opacity-100 visible;
+  }
+
+  /* Pagination */
+  .pagination {
+    @apply flex items-center space-x-1;
+  }
+
+  .pagination-item {
+    @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200;
+  }
+
+  .pagination-item-active {
+    @apply pagination-item bg-primary-600 text-white;
+  }
+
+  .pagination-item-inactive {
+    @apply pagination-item text-gray-500 hover:bg-gray-100;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    @apply flex items-center space-x-2 text-sm;
+  }
+
+  .breadcrumb-item {
+    @apply text-gray-500 hover:text-gray-700 transition-colors duration-200;
+  }
+
+  .breadcrumb-separator {
+    @apply text-gray-400;
+  }
+
+  /* Stats card */
+  .stats-card {
+    @apply card p-6;
+  }
+
+  .stats-value {
+    @apply text-2xl font-bold text-gray-900;
+  }
+
+  .stats-label {
+    @apply text-sm text-gray-600;
+  }
+
+  /* Feature card */
+  .feature-card {
+    @apply card p-6 text-center;
+  }
+
+  .feature-icon {
+    @apply w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4;
+  }
+
+  /* Testimonial card */
+  .testimonial-card {
+    @apply card p-6;
+  }
+
+  .testimonial-content {
+    @apply text-gray-600 italic mb-4;
+  }
+
+  .testimonial-author {
+    @apply flex items-center;
+  }
+
+  .testimonial-avatar {
+    @apply w-10 h-10 rounded-full mr-3;
+  }
+
+  .testimonial-info {
+    @apply flex-1;
+  }
+
+  .testimonial-name {
+    @apply font-medium text-gray-900;
+  }
+
+  .testimonial-role {
+    @apply text-sm text-gray-600;
+  }
+
+  /* Pricing card */
+  .pricing-card {
+    @apply card p-8 text-center;
+  }
+
+  .pricing-popular {
+    @apply ring-2 ring-primary-500 relative;
+  }
+
+  .pricing-popular-badge {
+    @apply absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .pricing-price {
+    @apply text-4xl font-bold text-gray-900 mb-2;
+  }
+
+  .pricing-period {
+    @apply text-gray-600;
+  }
+
+  .pricing-features {
+    @apply space-y-3 mb-6;
+  }
+
+  .pricing-feature {
+    @apply flex items-center text-sm text-gray-600;
+  }
+
+  .pricing-feature-check {
+    @apply w-5 h-5 text-success-500 mr-2;
+  }
+
+  /* Step indicator */
+  .steps {
+    @apply flex items-center justify-between mb-8;
+  }
+
+  .step {
+    @apply flex flex-col items-center relative;
+  }
+
+  .step-number {
+    @apply w-8 h-8 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-medium mb-2;
+  }
+
+  .step-active .step-number {
+    @apply border-primary-500 bg-primary-500 text-white;
+  }
+
+  .step-completed .step-number {
+    @apply border-success-500 bg-success-500 text-white;
+  }
+
+  .step-label {
+    @apply text-sm font-medium text-gray-500;
+  }
+
+  .step-active .step-label {
+    @apply text-primary-600;
+  }
+
+  .step-completed .step-label {
+    @apply text-success-600;
+  }
+
+  .step-connector {
+    @apply absolute top-4 left-1/2 w-full h-0.5 bg-gray-300 -z-10;
+  }
+
+  /* Timeline */
+  .timeline {
+    @apply relative;
+  }
+
+  .timeline-item {
+    @apply relative pb-8;
+  }
+
+  .timeline-item:last-child {
+    @apply pb-0;
+  }
+
+  .timeline-marker {
+    @apply absolute left-0 w-4 h-4 bg-primary-500 rounded-full border-4 border-white;
+  }
+
+  .timeline-content {
+    @apply ml-6;
+  }
+
+  .timeline-connector {
+    @apply absolute left-2 top-4 w-0.5 h-full bg-gray-200;
+  }
+
+  .timeline-item:last-child .timeline-connector {
+    @apply hidden;
+  }
+
+  /* File upload */
+  .file-upload {
+    @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center transition-colors duration-200;
+  }
+
+  .file-upload:hover {
+    @apply border-primary-400;
+  }
+
+  .file-upload-dragover {
+    @apply border-primary-500 bg-primary-50;
+  }
+
+  /* Rating stars */
+  .rating {
+    @apply flex items-center;
+  }
+
+  .rating-star {
+    @apply w-5 h-5 text-gray-300;
+  }
+
+  .rating-star-filled {
+    @apply text-yellow-400;
+  }
+
+  .rating-star-half {
+    @apply text-yellow-400;
+  }
+
+  /* Countdown timer */
+  .countdown {
+    @apply flex items-center space-x-4;
+  }
+
+  .countdown-item {
+    @apply text-center;
+  }
+
+  .countdown-value {
+    @apply text-2xl font-bold text-gray-900;
+  }
+
+  .countdown-label {
+    @apply text-xs text-gray-600 uppercase tracking-wide;
+  }
+
+  /* Divider */
+  .divider {
+    @apply relative my-8;
+  }
+
+  .divider-line {
+    @apply absolute inset-0 flex items-center;
+  }
+
+  .divider-line::before {
+    @apply w-full border-t border-gray-300;
+    content: '';
+  }
+
+  .divider-content {
+    @apply relative flex justify-center text-sm;
+  }
+
+  .divider-text {
+    @apply px-2 text-gray-500 bg-white;
+  }
+
+  /* Empty state */
+  .empty-state {
+    @apply text-center py-12;
+  }
+
+  .empty-state-icon {
+    @apply w-16 h-16 text-gray-400 mx-auto mb-4;
+  }
+
+  .empty-state-title {
+    @apply text-lg font-medium text-gray-900 mb-2;
+  }
+
+  .empty-state-description {
+    @apply text-gray-600 mb-6 max-w-md mx-auto;
+  }
+
+  /* Notification */
+  .notification {
+    @apply fixed top-4 right-4 z-50 max-w-sm w-full bg-white rounded-lg shadow-lg border border-gray-200 p-4 transform transition-all duration-300;
+  }
+
+  .notification-enter {
+    @apply translate-x-full opacity-0;
+  }
+
+  .notification-enter-active {
+    @apply translate-x-0 opacity-100;
+  }
+
+  .notification-exit {
+    @apply translate-x-0 opacity-100;
+  }
+
+  .notification-exit-active {
+    @apply translate-x-full opacity-0;
+  }
+
+  /* Chat bubble */
+  .chat-bubble {
+    @apply max-w-xs lg:max-w-md px-4 py-2 rounded-lg;
+  }
+
+  .chat-bubble-sent {
+    @apply chat-bubble bg-primary-600 text-white ml-auto;
+  }
+
+  .chat-bubble-received {
+    @apply chat-bubble bg-gray-100 text-gray-900;
+  }
+
+  /* Kanban card */
+  .kanban-card {
+    @apply card p-4 mb-3 cursor-move;
+  }
+
+  .kanban-column {
+    @apply bg-gray-50 rounded-lg p-4 min-h-96;
+  }
+
+  .kanban-column-header {
+    @apply font-semibold text-gray-700 mb-4;
+  }
+
+  /* Calendar */
+  .calendar {
+    @apply bg-white rounded-lg shadow;
+  }
+
+  .calendar-header {
+    @apply flex items-center justify-between p-4 border-b border-gray-200;
+  }
+
+  .calendar-grid {
+    @apply grid grid-cols-7 gap-px bg-gray-200;
+  }
+
+  .calendar-day {
+    @apply bg-white p-2 min-h-24;
+  }
+
+  .calendar-day-header {
+    @apply text-sm font-medium text-gray-500 text-center py-2;
+  }
+
+  .calendar-day-other {
+    @apply bg-gray-50 text-gray-400;
+  }
+
+  .calendar-event {
+    @apply text-xs p-1 rounded mb-1 truncate;
+  }
 }
 
-/* Custom utility styles */
+/* Custom Utility Styles */
 @layer utilities {
   /* Text balance for better readability */
   .text-balance {
@@ -292,53 +748,241 @@
   }
 
   @keyframes glow {
-    from { box-shadow: 0 0 20px -10px #3b82f6; }
-    to { box-shadow: 0 0 20px -5px #3b82f6, 0 0 30px -10px #3b82f6; }
+    from { box-shadow: 0 0 20px -10px theme('colors.primary.500'); }
+    to { box-shadow: 0 0 20px -5px theme('colors.primary.500'), 0 0 30px -10px theme('colors.primary.500'); }
+  }
+
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s infinite;
+  }
+
+  @keyframes bounce-gentle {
+    0%, 100% { 
+      transform: translateY(-5%); 
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% { 
+      transform: translateY(0); 
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .line-clamp-4 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  /* Aspect ratios */
+  .aspect-vertical {
+    aspect-ratio: 9/16;
+  }
+
+  .aspect-horizontal {
+    aspect-ratio: 16/9;
+  }
+
+  .aspect-square {
+    aspect-ratio: 1/1;
+  }
+
+  /* Text shadow */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-shadow-md {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Backdrop filters */
+  .backdrop-blur {
+    backdrop-filter: blur(8px);
+  }
+
+  .backdrop-blur-lg {
+    backdrop-filter: blur(16px);
+  }
+
+  .backdrop-blur-xl {
+    backdrop-filter: blur(24px);
+  }
+
+  /* Blend modes */
+  .blend-multiply {
+    mix-blend-mode: multiply;
+  }
+
+  .blend-screen {
+    mix-blend-mode: screen;
+  }
+
+  .blend-overlay {
+    mix-blend-mode: overlay;
+  }
+
+  /* Filter effects */
+  .filter-grayscale {
+    filter: grayscale(100%);
+  }
+
+  .filter-sepia {
+    filter: sepia(100%);
+  }
+
+  .filter-saturate {
+    filter: saturate(150%);
+  }
+
+  /* Clip paths */
+  .clip-circle {
+    clip-path: circle(50% at 50% 50%);
+  }
+
+  .clip-triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+
+  .clip-hexagon {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  }
+
+  /* Writing modes */
+  .writing-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .writing-vertical-lr {
+    writing-mode: vertical-lr;
+  }
+
+  /* Scroll snap */
+  .snap-x {
+    scroll-snap-type: x mandatory;
+  }
+
+  .snap-y {
+    scroll-snap-type: y mandatory;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .snap-center {
+    scroll-snap-align: center;
+  }
+
+  .snap-end {
+    scroll-snap-align: end;
+  }
+
+  /* Touch action */
+  .touch-pan-x {
+    touch-action: pan-x;
+  }
+
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
+
+  .touch-none {
+    touch-action: none;
+  }
+
+  /* Will-change */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  .will-change-scroll {
+    will-change: scroll-position;
   }
 
   /* Print styles */
   @media print {
-    .no-print {
+    .print-hidden {
       display: none !important;
     }
-    
+
+    .print-visible {
+      display: block !important;
+    }
+
     .print-break-before {
       page-break-before: always;
     }
-    
+
     .print-break-after {
       page-break-after: always;
     }
-    
+
     .print-break-inside-avoid {
       page-break-inside: avoid;
     }
-  }
 
-  /* Reduced motion support */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+    .print-black {
+      color: black !important;
+    }
+
+    .print-bg-white {
+      background: white !important;
     }
   }
 
-  /* High contrast mode support */
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-glow,
+    .animate-bounce-gentle {
+      animation: none;
+    }
+  }
+
+  /* High contrast */
   @media (prefers-contrast: high) {
-    .btn {
-      border-width: 2px;
+    .border-gray-200 {
+      border-color: black;
     }
     
-    .card {
-      border-width: 2px;
+    .text-gray-600 {
+      color: black;
     }
   }
 
-  /* Dark mode support (if needed later) */
+  /* Dark mode support */
   @media (prefers-color-scheme: dark) {
     .dark-mode-auto {
       @apply bg-gray-900 text-white;
@@ -355,9 +999,17 @@
   @apply bg-primary-600 border-primary-600;
 }
 
+.react-datepicker-wrapper {
+  @apply w-full;
+}
+
+.react-datepicker__input-container input {
+  @apply input;
+}
+
 /* React-specific fixes */
 #root {
-  @apply min-h-screen;
+  @apply min-h-screen flex flex-col;
 }
 
 /* Ensure images are responsive */
@@ -380,4 +1032,316 @@ img {
 
 .icon-xl {
   @apply w-8 h-8;
+}
+
+/* Fix for React modal portal */
+.ReactModal__Overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50;
+}
+
+.ReactModal__Content {
+  @apply bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-auto;
+}
+
+/* Fix for React Select */
+.react-select__control {
+  @apply input border-none p-0;
+}
+
+.react-select__menu {
+  @apply shadow-lg border border-gray-200 rounded-lg mt-1;
+}
+
+.react-select__option {
+  @apply px-3 py-2 cursor-pointer;
+}
+
+.react-select__option--is-focused {
+  @apply bg-gray-100;
+}
+
+.react-select__option--is-selected {
+  @apply bg-primary-600 text-white;
+}
+
+/* Fix for React Toastify */
+.Toastify__toast {
+  @apply rounded-lg shadow-lg;
+}
+
+.Toastify__toast--success {
+  @apply bg-success-600 text-white;
+}
+
+.Toastify__toast--error {
+  @apply bg-error-600 text-white;
+}
+
+.Toastify__toast--warning {
+  @apply bg-warning-600 text-white;
+}
+
+.Toastify__toast--info {
+  @apply bg-primary-600 text-white;
+}
+
+/* Custom styles for Hire & Learn specific components */
+
+/* Hero section gradients */
+.hero-gradient {
+  background: linear-gradient(135deg, theme('colors.primary.50') 0%, theme('colors.purple.50') 100%);
+}
+
+.hero-gradient-dark {
+  background: linear-gradient(135deg, theme('colors.gray.900') 0%, theme('colors.gray.800') 100%);
+}
+
+/* Brand gradient for logos and accents */
+.brand-gradient {
+  background: linear-gradient(135deg, theme('colors.primary.600') 0%, theme('colors.purple.600') 100%);
+}
+
+.brand-gradient-light {
+  background: linear-gradient(135deg, theme('colors.primary.100') 0%, theme('colors.purple.100') 100%);
+}
+
+/* Job and course card specific styles */
+.job-card-featured {
+  @apply ring-2 ring-primary-200 relative;
+}
+
+.course-card-popular {
+  @apply ring-2 ring-warning-200 relative;
+}
+
+/* Dashboard specific styles */
+.dashboard-sidebar {
+  @apply bg-white border-r border-gray-200 h-full;
+}
+
+.dashboard-main {
+  @apply flex-1 bg-gray-50;
+}
+
+/* Profile completion meter */
+.profile-meter {
+  @apply w-full bg-gray-200 rounded-full h-2;
+}
+
+.profile-meter-fill {
+  @apply h-2 rounded-full bg-success-500 transition-all duration-500;
+}
+
+/* Application status indicators */
+.status-applied {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.status-under-review {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.status-shortlisted {
+  @apply bg-purple-100 text-purple-800;
+}
+
+.status-interview {
+  @apply bg-orange-100 text-orange-800;
+}
+
+.status-rejected {
+  @apply bg-red-100 text-red-800;
+}
+
+.status-accepted {
+  @apply bg-green-100 text-green-800;
+}
+
+/* Skill level indicators */
+.skill-beginner {
+  @apply bg-gray-100 text-gray-800;
+}
+
+.skill-intermediate {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.skill-advanced {
+  @apply bg-green-100 text-green-800;
+}
+
+.skill-expert {
+  @apply bg-purple-100 text-purple-800;
+}
+
+/* Certificate styles */
+.certificate-border {
+  border: 2px solid #d4af37;
+  background: linear-gradient(45deg, #fff9e6, #fff);
+}
+
+.certificate-gold {
+  color: #d4af37;
+}
+
+/* Learning progress */
+.learning-progress {
+  @apply w-full bg-gray-200 rounded-full h-3;
+}
+
+.learning-progress-fill {
+  @apply h-3 rounded-full bg-primary-500 transition-all duration-500;
+}
+
+/* Review stars */
+.review-stars {
+  @apply flex items-center;
+}
+
+.review-star {
+  @apply w-4 h-4;
+}
+
+.review-star-filled {
+  @apply text-yellow-400 fill-current;
+}
+
+.review-star-empty {
+  @apply text-gray-300 fill-current;
+}
+
+/* Company logo placeholder */
+.company-logo-placeholder {
+  @apply w-12 h-12 bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg flex items-center justify-center text-primary-600 font-semibold;
+}
+
+/* Course thumbnail placeholder */
+.course-thumbnail-placeholder {
+  @apply w-full h-48 bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg flex items-center justify-center text-purple-400;
+}
+
+/* Mobile menu animations */
+.mobile-menu-enter {
+  transform: translateX(-100%);
+}
+
+.mobile-menu-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-in-out;
+}
+
+.mobile-menu-exit {
+  transform: translateX(0);
+}
+
+.mobile-menu-exit-active {
+  transform: translateX(-100%);
+  transition: transform 300ms ease-in-out;
+}
+
+/* Loading screen */
+.loading-screen {
+  @apply fixed inset-0 bg-white z-50 flex items-center justify-center;
+}
+
+.loading-spinner-large {
+  @apply w-16 h-16 border-4 border-primary-200 border-t-primary-600 rounded-full animate-spin;
+}
+
+/* Error boundary */
+.error-boundary {
+  @apply min-h-screen flex items-center justify-center bg-gray-50 p-4;
+}
+
+.error-boundary-content {
+  @apply text-center max-w-md;
+}
+
+/* Maintenance mode */
+.maintenance-mode {
+  @apply min-h-screen flex items-center justify-center bg-gray-50;
+}
+
+.maintenance-content {
+  @apply text-center max-w-2xl;
+}
+
+/* 404 page */
+.not-found {
+  @apply min-h-screen flex items-center justify-center bg-gray-50;
+}
+
+.not-found-content {
+  @apply text-center;
+}
+
+/* Ensure the app takes full viewport height */
+html, body, #root {
+  height: 100%;
+}
+
+/* Main content area should grow to fill space */
+main {
+  flex: 1 0 auto;
+}
+
+/* Footer should stick to bottom */
+footer {
+  flex-shrink: 0;
+}
+
+/* Print optimization */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .break-before {
+    page-break-before: always;
+  }
+  
+  .break-after {
+    page-break-after: always;
+  }
+  
+  .break-inside-avoid {
+    page-break-inside: avoid;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-contrast: high) {
+  .btn {
+    border-width: 2px;
+  }
+  
+  .card {
+    border-width: 2px;
+  }
+  
+  .input {
+    border-width: 2px;
+  }
+}
+
+/* Focus management for keyboard navigation */
+.focus-visible {
+  @apply outline-none ring-2 ring-primary-500 ring-opacity-50;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-white focus:px-4 focus:py-2 focus:text-primary-600 focus:font-medium focus:rounded-lg focus:shadow-lg;
 }
