@@ -1,5 +1,17 @@
 {
   "dependencies": {
-    "multer-storage-cloudinary": "^4.0.0"
+    "axios": "^1.13.2",
+    "handlebars": "^4.7.8",
+    "lucide-react": "^0.553.0",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^7.0.10",
+    "pdfkit": "^0.17.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2"
   }
 }

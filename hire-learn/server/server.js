@@ -134,3 +134,41 @@ process.on('SIGTERM', () => {
 startServer();
 
 module.exports = app;
+
+//Usage Examples in Server
+// In server.js
+const { 
+  errorHandler, 
+  notFound, 
+  securityHeaders, 
+  requestLogger 
+} = require('./middleware/errorHandler');
+
+// Apply middleware
+app.use(securityHeaders);
+app.use(requestLogger);
+
+// Routes here...
+
+app.use(notFound);
+app.use(errorHandler);
+
+// In routes with auth middleware
+const { protect, authorize, ownerOrAdmin } = require('../middleware/auth');
+const { uploadSingle, requireFile } = require('../middleware/upload');
+
+// Example route with multiple middleware
+router.post('/jobs', 
+  protect, 
+  authorize('employer', 'admin'), 
+  uploadSingle('companyLogo', 'image'),
+  createJob
+);
+
+// Example with file validation
+router.post('/apply', 
+  protect, 
+  uploadSingle('resume', 'resume'),
+  requireFile('resume'),
+  applyToJob
+);
